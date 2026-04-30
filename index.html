@@ -214,6 +214,103 @@
   </div>
 </section>
 
+<!-- SPACE FRICTION QUIZ -->
+<section class="mx-auto max-w-5xl px-6 py-16">
+  <div class="border bg-white p-8">
+    <h2 class="text-3xl font-semibold">Is your space working against you?</h2>
+    <p class="mt-3 text-[#5c5751]">
+      Take a quick space friction check and see where your setup may be making life harder than it needs to be.
+    </p>
+
+    <form id="spaceQuiz" class="mt-8 space-y-6">
+
+      <div>
+        <p class="font-semibold">1. Do things pile up in the same spots?</p>
+        <label><input type="radio" name="q1" value="0"> Rarely</label><br>
+        <label><input type="radio" name="q1" value="5"> Sometimes</label><br>
+        <label><input type="radio" name="q1" value="10"> Constantly</label>
+      </div>
+
+      <div>
+        <p class="font-semibold">2. Are things stored where you actually use them?</p>
+        <label><input type="radio" name="q2" value="0"> Yes</label><br>
+        <label><input type="radio" name="q2" value="5"> Some are</label><br>
+        <label><input type="radio" name="q2" value="10"> Not really</label>
+      </div>
+
+      <div>
+        <p class="font-semibold">3. How often do you walk across the room to finish a simple task?</p>
+        <label><input type="radio" name="q3" value="0"> Rarely</label><br>
+        <label><input type="radio" name="q3" value="5"> Sometimes</label><br>
+        <label><input type="radio" name="q3" value="10"> Often</label>
+      </div>
+
+      <div>
+        <p class="font-semibold">4. How easy is it to reset the space at the end of the day?</p>
+        <label><input type="radio" name="q4" value="0"> Easy</label><br>
+        <label><input type="radio" name="q4" value="5"> Takes effort</label><br>
+        <label><input type="radio" name="q4" value="10"> I avoid it</label>
+      </div>
+
+      <div>
+        <p class="font-semibold">5. Does the space make daily tasks feel harder than they should?</p>
+        <label><input type="radio" name="q5" value="0"> No</label><br>
+        <label><input type="radio" name="q5" value="5"> Sometimes</label><br>
+        <label><input type="radio" name="q5" value="10"> Yes</label>
+      </div>
+
+      <button type="button" onclick="calculateQuiz()" class="bg-[#2d4a41] text-white px-6 py-3">
+        Get My Space Friction Score
+      </button>
+    </form>
+
+    <div id="quizResult" class="hidden mt-8 border-t pt-6">
+      <h3 class="text-2xl font-semibold" id="resultTitle"></h3>
+      <p class="mt-3 text-[#5c5751]" id="resultText"></p>
+      <a href="YOUR CALENDLY LINK HERE" class="mt-5 inline-block bg-[#2d4a41] text-white px-5 py-3">
+        Book a Free Call
+      </a>
+    </div>
+  </div>
+</section>
+
+<script>
+function calculateQuiz() {
+  const form = document.getElementById('spaceQuiz');
+  const questions = ['q1', 'q2', 'q3', 'q4', 'q5'];
+  let total = 0;
+
+  for (let q of questions) {
+    const answer = form.querySelector(`input[name="${q}"]:checked`);
+    if (!answer) {
+      alert('Please answer all questions.');
+      return;
+    }
+    total += Number(answer.value);
+  }
+
+  const optimizedScore = 100 - (total * 2);
+
+  let title = '';
+  let text = '';
+
+  if (optimizedScore >= 75) {
+    title = `Your space is about ${optimizedScore}% optimized.`;
+    text = 'Your space is mostly working, but there may still be small friction points that could make daily routines easier.';
+  } else if (optimizedScore >= 45) {
+    title = `Your space is about ${optimizedScore}% optimized.`;
+    text = 'Your space is probably creating more friction than you realize. Small setup changes could save time, energy, and decision-making every day.';
+  } else {
+    title = `Your space is about ${optimizedScore}% optimized.`;
+    text = 'Your space is likely working against you in multiple ways. This is not about being disorganized. The setup itself may be making things harder than they need to be.';
+  }
+
+  document.getElementById('resultTitle').innerText = title;
+  document.getElementById('resultText').innerText = text;
+  document.getElementById('quizResult').classList.remove('hidden');
+}
+</script>		
+
 <!-- CTA -->
 <section class="bg-[#2d4a41] text-white text-center py-16 px-6">
   <h2 class="text-3xl font-semibold">Ready to make your space stop working against you?</h2>
